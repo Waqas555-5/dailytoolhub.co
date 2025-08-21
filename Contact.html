@@ -1,66 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Contact Us — Daily Tools Hub</title>
-  <meta name="description" content="Get in touch with Daily Tools Hub for support, partnerships, or suggestions." />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - Daily Tools Hub</title>
   <style>
-    :root { --brand:#0d6efd; --bg:#f5f7fb; --text:#222 }
-    body{margin:0;font-family:system-ui,Segoe UI,Arial;background:var(--bg);color:var(--text)}
-    .nav{background:var(--brand);color:#fff}
-    .nav-inner{max-width:1080px;margin:0 auto;padding:14px 16px;display:flex;justify-content:space-between}
-    .menu a{color:#fff;text-decoration:none;margin:0 8px;font-weight:600}
-    .wrap{max-width:760px;margin:18px auto;padding:0 16px}
-    .card{background:#fff;border-radius:14px;box-shadow:0 6px 18px rgba(0,0,0,.06);padding:20px}
-    h1{color:var(--brand);margin:0 0 10px}
-    label{display:block;margin:8px 0 6px;font-weight:600}
-    input,textarea,button{width:100%;padding:12px 14px;border:1px solid #dcdfe4;border-radius:10px}
-    textarea{min-height:120px;resize:vertical}
-    button{background:var(--brand);color:#fff;border:none;font-weight:700;cursor:pointer;margin-top:10px}
-    button:hover{filter:brightness(.95)}
-    .info{margin-top:14px;color:#444}
-    footer{text-align:center;color:#555;margin:26px 0 40px}
-    footer a{color:var(--brand);text-decoration:none;margin:0 6px}
+    body {font-family: Arial, sans-serif; background:#f9f9f9; margin:0;}
+    header {background:#2c3e50; padding:15px 30px;}
+    nav {display:flex; justify-content:space-between; align-items:center;}
+    nav .logo {color:#fff; font-size:22px; font-weight:bold;}
+    nav ul {list-style:none; display:flex;}
+    nav ul li {margin-left:20px;}
+    nav ul li a {color:#fff; text-decoration:none;}
+    nav ul li a:hover, nav ul li a.active {color:#f1c40f;}
+    section {padding:40px; max-width:900px; margin:auto;}
+    form {background:#fff; padding:20px; border-radius:10px; box-shadow:0 4px 6px rgba(0,0,0,0.1);}
+    form input, form textarea {width:100%; padding:10px; margin:10px 0; border:1px solid #ccc; border-radius:5px;}
+    form button {padding:10px 15px; background:#2980b9; color:#fff; border:none; border-radius:5px; cursor:pointer;}
+    form button:hover {background:#3498db;}
+    footer {background:#2c3e50; color:#fff; text-align:center; padding:15px; margin-top:30px;}
   </style>
 </head>
 <body>
-  <div class="nav">
-    <div class="nav-inner">
-      <div><strong>Daily Tools Hub</strong></div>
-      <div class="menu">
-        <a href="index.html">Home</a><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="wrap">
-    <div class="card">
-      <h1>Contact Us</h1>
-      <p>Feedback, feature request, ya support chahiye? Hume message bhejein.</p>
-
-      <!-- Simple mailto form (opens user email app) -->
-      <form action="mailto:support@dailytoolshub.com" method="post" enctype="text/plain">
-        <label>Your Name</label>
-        <input type="text" name="name" required />
-        <label>Your Email</label>
-        <input type="email" name="email" required />
-        <label>Message</label>
-        <textarea name="message" required></textarea>
-        <button type="submit">Send Message</button>
-      </form>
-
-      <div class="info">
-        <p><strong>Email:</strong> support@dailytoolshub.com</p>
-        <p><strong>Phone:</strong> +92-300-1234567</p>
-        <p><strong>Location:</strong> Lahore, Pakistan</p>
-      </div>
-    </div>
-  </div>
-
+  <header>
+    <nav>
+      <div class="logo">Daily Tools Hub</div>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+        <li><a href="privacy.html">Privacy</a></li>
+      </ul>
+    </nav>
+  </header>
+  <section>
+    <h1>Contact Us</h1>
+    <p>If you have any questions, suggestions, or feedback, feel free to reach out using the form below:</p>
+    <form>
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea rows="5" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
   <footer>
-    © <script>document.write(new Date().getFullYear())</script> Daily Tools Hub •
-    <a href="index.html">Home</a> • <a href="about.html">About</a> • <a href="privacy.html">Privacy</a>
+    <p>© 2025 Daily Tools Hub. All Rights Reserved.</p>
   </footer>
 </body>
 </html>
