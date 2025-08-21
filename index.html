@@ -1,140 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Free Online Tools - Age, BMI & Unit Converter</title>
-  <meta name="description" content="Free online tools like Age Calculator, BMI Calculator, and Unit Converter. Simple and fast tools to make your daily life easier.">
-  <meta name="keywords" content="age calculator, bmi calculator, unit converter, online tools, free tools, daily calculator">
-  <meta name="author" content="My Tools Website">
-
-  <!-- Google AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-xxxxxxxxxx"
-     crossorigin="anonymous"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Daily Tools Hub — Free Age, BMI & Unit Converter</title>
+  <meta name="description" content="Free online tools: Age Calculator, BMI Calculator, and Unit Converter. Fast, accurate, and mobile-friendly." />
+  <meta name="keywords" content="age calculator,bmi calculator,unit converter,online tools,free calculators" />
   <style>
-    body { font-family: Arial, sans-serif; margin: 20px; text-align: center; }
-    h1 { color: #333; }
-    section { margin: 40px 0; padding: 20px; border: 1px solid #ddd; border-radius: 10px; }
-    input, select, button { margin: 5px; padding: 10px; }
-    footer { margin-top: 40px; }
-    .converter-box input { width: 200px; margin: 5px; }
+    :root { --brand:#0d6efd; --bg:#f5f7fb; --text:#222; --muted:#666; }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--text)}
+    .nav{background:var(--brand);color:#fff}
+    .nav-inner{max-width:1080px;margin:0 auto;display:flex;gap:18px;align-items:center;justify-content:space-between;padding:14px 16px}
+    .brand{font-weight:700;letter-spacing:.2px}
+    .menu a{color:#fff;text-decoration:none;margin:0 8px;font-weight:600}
+    .hero{max-width:1080px;margin:18px auto 0;padding:0 16px}
+    .card{background:#fff;border-radius:14px;box-shadow:0 6px 18px rgba(0,0,0,.06);padding:20px;margin:14px 0}
+    h1{margin:0 0 6px}
+    h2{margin:0 0 12px;color:var(--brand)}
+    label{display:block;margin:10px 0 6px;font-weight:600}
+    input,select,button{width:100%;padding:12px 14px;border:1px solid #dcdfe4;border-radius:10px}
+    input:focus,select:focus{outline:none;border-color:var(--brand)}
+    button{background:var(--brand);color:#fff;border:none;cursor:pointer;font-weight:700}
+    button:hover{filter:brightness(.95)}
+    .grid{display:grid;gap:16px}
+    @media(min-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+    .result{margin-top:10px;padding:12px;border:1px dashed #e5e7eb;border-radius:10px;background:#fafcff}
+    footer{margin:26px 0 40px;text-align:center;color:var(--muted)}
+    footer a{color:var(--brand);text-decoration:none;margin:0 6px}
   </style>
 </head>
 <body>
-  <h1>🎉 Free Online Tools</h1>
-  <p>Simple tools to calculate Age, BMI, and convert units instantly.</p>
+  <!-- Navbar -->
+  <div class="nav">
+    <div class="nav-inner">
+      <div class="brand">Daily Tools Hub</div>
+      <div class="menu">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="privacy.html">Privacy</a>
+      </div>
+    </div>
+  </div>
 
-  <!-- Ad slot top -->
-  <ins class="adsbygoogle"
-       style="display:block"
-       data-ad-client="ca-pub-xxxxxxxxxx"
-       data-ad-slot="1234567890"
-       data-ad-format="auto"></ins>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
-  <!-- Age Calculator -->
-  <section id="age-calculator">
-    <h2>Age Calculator</h2>
-    <input type="date" id="dob">
-    <button onclick="calculateAge()">Calculate Age</button>
-    <p id="age-result"></p>
-  </section>
-
-  <!-- BMI Calculator -->
-  <section id="bmi-calculator">
-    <h2>BMI Calculator</h2>
-    <input type="number" id="weight" placeholder="Weight in kg">
-    <input type="number" id="height" placeholder="Height in cm">
-    <button onclick="calculateBMI()">Calculate BMI</button>
-    <p id="bmi-result"></p>
-  </section>
-
-  <!-- Unit Converter -->
-  <section id="converter">
-    <h2>Unit Converter</h2>
-    <label for="converter-type">Select Converter:</label>
-    <select id="converter-type" onchange="showConverter()">
-      <option value="length">Length (Meter ↔ Kilometer)</option>
-      <option value="weight">Weight (Kg ↔ Gram)</option>
-      <option value="temp">Temperature (C ↔ F)</option>
-    </select>
-
-    <!-- Length Converter -->
-    <div id="length-converter" class="converter-box">
-      <input type="number" id="meters" placeholder="Meters" oninput="metersToKm()">
-      <input type="number" id="kilometers" placeholder="Kilometers" oninput="kmToMeters()">
+  <section class="hero">
+    <div class="card">
+      <h1>Free Online Calculators & Converters</h1>
+      <p style="color:#444">Calculate your age, check BMI, and convert units instantly. No data stored — everything runs in your browser.</p>
     </div>
 
-    <!-- Weight Converter -->
-    <div id="weight-converter" class="converter-box" style="display:none;">
-      <input type="number" id="kg" placeholder="Kilograms" oninput="kgToGram()">
-      <input type="number" id="grams" placeholder="Grams" oninput="gramToKg()">
-    </div>
+    <div class="grid">
+      <!-- Age Calculator -->
+      <div class="card">
+        <h2>🎂 Age Calculator</h2>
+        <label for="dob">Date of Birth</label>
+        <input type="date" id="dob" />
+        <button onclick="calculateAge()">Calculate Age</button>
+        <div class="result" id="ageBox" style="display:none">
+          <div><strong>Exact Age:</strong> <span id="ageOut"></span></div>
+          <div><strong>Next Birthday:</strong> <span id="nextOut"></span></div>
+        </div>
+      </div>
 
-    <!-- Temperature Converter -->
-    <div id="temp-converter" class="converter-box" style="display:none;">
-      <input type="number" id="celsius" placeholder="Celsius" oninput="cToF()">
-      <input type="number" id="fahrenheit" placeholder="Fahrenheit" oninput="fToC()">
+      <!-- BMI Calculator -->
+      <div class="card">
+        <h2>⚖️ BMI Calculator</h2>
+        <label for="height">Height (cm)</label>
+        <input type="number" id="height" placeholder="e.g. 170" />
+        <label for="weight">Weight (kg)</label>
+        <input type="number" id="weight" placeholder="e.g. 65" />
+        <button onclick="calculateBMI()">Calculate BMI</button>
+        <div class="result" id="bmiBox" style="display:none">
+          <div><strong>Your BMI:</strong> <span id="bmiOut"></span></div>
+          <div><strong>Status:</strong> <span id="bmiStatus"></span></div>
+        </div>
+      </div>
+
+      <!-- Unit Converter -->
+      <div class="card" style="grid-column:1/-1">
+        <h2>🧮 Unit Converter</h2>
+        <label for="type">Converter Type</label>
+        <select id="type" onchange="showConverter()">
+          <option value="length">Length (Meter ↔ Kilometer)</option>
+          <option value="weight">Weight (Kg ↔ Gram)</option>
+          <option value="temp">Temperature (°C ↔ °F)</option>
+        </select>
+
+        <div id="length" class="grid" style="margin-top:10px">
+          <div><label>Meters</label><input type="number" id="meters" oninput="metersToKm()"></div>
+          <div><label>Kilometers</label><input type="number" id="kilometers" oninput="kmToMeters()"></div>
+        </div>
+
+        <div id="weightBox" class="grid" style="display:none;margin-top:10px">
+          <div><label>Kilograms</label><input type="number" id="kg" oninput="kgToGram()"></div>
+          <div><label>Grams</label><input type="number" id="grams" oninput="gramToKg()"></div>
+        </div>
+
+        <div id="tempBox" class="grid" style="display:none;margin-top:10px">
+          <div><label>Celsius (°C)</label><input type="number" id="celsius" oninput="cToF()"></div>
+          <div><label>Fahrenheit (°F)</label><input type="number" id="fahrenheit" oninput="fToC()"></div>
+        </div>
+      </div>
     </div>
   </section>
-
-  <!-- Ad slot bottom -->
-  <ins class="adsbygoogle"
-       style="display:block"
-       data-ad-client="ca-pub-xxxxxxxxxx"
-       data-ad-slot="0987654321"
-       data-ad-format="auto"></ins>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 
   <footer>
-    <p>
-      <a href="about.html">About Us</a> | 
-      <a href="contact.html">Contact Us</a> | 
-      <a href="privacy.html">Privacy Policy</a>
-    </p>
+    © <span id="year"></span> Daily Tools Hub •
+    <a href="about.html">About</a> •
+    <a href="contact.html">Contact</a> •
+    <a href="privacy.html">Privacy</a>
   </footer>
 
-<script>
-  // Age Calculator
-  function calculateAge() {
-    let dob = document.getElementById("dob").value;
-    if (!dob) { document.getElementById("age-result").innerText = "Please select your date of birth."; return; }
-    let birthDate = new Date(dob);
-    let today = new Date();
-    let age = today.getFullYear() - birthDate.getFullYear();
-    let m = today.getMonth() - birthDate.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) age--;
-    document.getElementById("age-result").innerText = "Your Age is: " + age + " years";
-  }
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-  // BMI Calculator
-  function calculateBMI() {
-    let w = document.getElementById("weight").value;
-    let h = document.getElementById("height").value;
-    if (!w || !h) { document.getElementById("bmi-result").innerText = "Please enter weight and height."; return; }
-    let bmi = w / ((h/100) * (h/100));
-    let category = "";
-    if (bmi < 18.5) category = "Underweight";
-    else if (bmi < 24.9) category = "Normal weight";
-    else if (bmi < 29.9) category = "Overweight";
-    else category = "Obese";
-    document.getElementById("bmi-result").innerText = "Your BMI is " + bmi.toFixed(2) + " (" + category + ")";
-  }
+    // Age
+    function calculateAge(){
+      const v = document.getElementById('dob').value;
+      if(!v){ alert('Select your birth date'); return; }
+      const b = new Date(v), t = new Date();
+      let y=t.getFullYear()-b.getFullYear(), m=t.getMonth()-b.getMonth(), d=t.getDate()-b.getDate();
+      if(d<0){ m--; d += new Date(t.getFullYear(), t.getMonth(), 0).getDate(); }
+      if(m<0){ y--; m+=12; }
+      document.getElementById('ageOut').textContent = `${y} years, ${m} months, ${d} days`;
+      let next = new Date(t.getFullYear(), b.getMonth(), b.getDate());
+      if(next < t) next.setFullYear(t.getFullYear()+1);
+      const daysLeft = Math.ceil((next - t)/(1000*60*60*24));
+      document.getElementById('nextOut').textContent = `${next.toDateString()} (${daysLeft} days left)`;
+      document.getElementById('ageBox').style.display='block';
+    }
 
-  // Unit Converter
-  function showConverter() {
-    document.getElementById("length-converter").style.display = "none";
-    document.getElementById("weight-converter").style.display = "none";
-    document.getElementById("temp-converter").style.display = "none";
-    let type = document.getElementById("converter-type").value;
-    document.getElementById(type + "-converter").style.display = "block";
-  }
-  function metersToKm() { let m = document.getElementById("meters").value; document.getElementById("kilometers").value = (m/1000).toFixed(3); }
-  function kmToMeters() { let km = document.getElementById("kilometers").value; document.getElementById("meters").value = (km*1000).toFixed(2); }
-  function kgToGram() { let kg = document.getElementById("kg").value; document.getElementById("grams").value = (kg*1000).toFixed(2); }
-  function gramToKg() { let g = document.getElementById("grams").value; document.getElementById("kg").value = (g/1000).toFixed(3); }
-  function cToF() { let c = document.getElementById("celsius").value; document.getElementById("fahrenheit").value = ((c*9/5)+32).toFixed(2); }
-  function fToC() { let f = document.getElementById("fahrenheit").value; document.getElementById("celsius").value = ((f-32)*5/9).toFixed(2); }
-</script>
+    // BMI
+    function calculateBMI(){
+      const h = parseFloat(document.getElementById('height').value);
+      const w = parseFloat(document.getElementById('weight').value);
+      if(!h || !w){ alert('Enter height and weight'); return; }
+      const bmi = (w / ((h/100)**2)).toFixed(1);
+      let status = bmi<18.5?'Underweight': bmi<25?'Normal': bmi<30?'Overweight':'Obese';
+      document.getElementById('bmiOut').textContent = bmi;
+      document.getElementById('bmiStatus').textContent = status;
+      document.getElementById('bmiBox').style.display='block';
+    }
+
+    // Converter
+    function showConverter(){
+      document.getElementById('length').style.display='none';
+      document.getElementById('weightBox').style.display='none';
+      document.getElementById('tempBox').style.display='none';
+      const t = document.getElementById('type').value;
+      if(t==='length') document.getElementById('length').style.display='grid';
+      if(t==='weight') document.getElementById('weightBox').style.display='grid';
+      if(t==='temp') document.getElementById('tempBox').style.display='grid';
+    }
+    function metersToKm(){ const v=+document.getElementById('meters').value; document.getElementById('kilometers').value=(v/1000||0).toFixed(3); }
+    function kmToMeters(){ const v=+document.getElementById('kilometers').value; document.getElementById('meters').value=(v*1000||0).toFixed(2); }
+    function kgToGram(){ const v=+document.getElementById('kg').value; document.getElementById('grams').value=(v*1000||0).toFixed(0); }
+    function gramToKg(){ const v=+document.getElementById('grams').value; document.getElementById('kg').value=(v/1000||0).toFixed(3); }
+    function cToF(){ const v=+document.getElementById('celsius').value; document.getElementById('fahrenheit').value=((v*9/5)+32).toFixed(2); }
+    function fToC(){ const v=+document.getElementById('fahrenheit').value; document.getElementById('celsius').value=((v-32)*5/9).toFixed(2); }
+  </script>
 </body>
-    </html>
+</html>
