@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Online Tools - Age, BMI & Unit Converter</title>
+  <meta name="description" content="Free online tools like Age Calculator, BMI Calculator, and Unit Converter. Simple and fast tools to make your daily life easier.">
+  <meta name="keywords" content="age calculator, bmi calculator, unit converter, online tools, free tools, daily calculator">
+  <meta name="author" content="My Tools Website">
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-xxxxxxxxxx"
+     crossorigin="anonymous"></script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; text-align: center; }
+    h1 { color: #333; }
+    section { margin: 40px 0; padding: 20px; border: 1px solid #ddd; border-radius: 10px; }
+    input, select, button { margin: 5px; padding: 10px; }
+    footer { margin-top: 40px; }
+    .converter-box input { width: 200px; margin: 5px; }
+  </style>
+</head>
+<body>
+  <h1>🎉 Free Online Tools</h1>
+  <p>Simple tools to calculate Age, BMI, and convert units instantly.</p>
+
+  <!-- Ad slot top -->
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-xxxxxxxxxx"
+       data-ad-slot="1234567890"
+       data-ad-format="auto"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+  <!-- Age Calculator -->
+  <section id="age-calculator">
+    <h2>Age Calculator</h2>
+    <input type="date" id="dob">
+    <button onclick="calculateAge()">Calculate Age</button>
+    <p id="age-result"></p>
+  </section>
+
+  <!-- BMI Calculator -->
+  <section id="bmi-calculator">
+    <h2>BMI Calculator</h2>
+    <input type="number" id="weight" placeholder="Weight in kg">
+    <input type="number" id="height" placeholder="Height in cm">
+    <button onclick="calculateBMI()">Calculate BMI</button>
+    <p id="bmi-result"></p>
+  </section>
+
+  <!-- Unit Converter -->
+  <section id="converter">
+    <h2>Unit Converter</h2>
+    <label for="converter-type">Select Converter:</label>
+    <select id="converter-type" onchange="showConverter()">
+      <option value="length">Length (Meter ↔ Kilometer)</option>
+      <option value="weight">Weight (Kg ↔ Gram)</option>
+      <option value="temp">Temperature (C ↔ F)</option>
+    </select>
+
+    <!-- Length Converter -->
+    <div id="length-converter" class="converter-box">
+      <input type="number" id="meters" placeholder="Meters" oninput="metersToKm()">
+      <input type="number" id="kilometers" placeholder="Kilometers" oninput="kmToMeters()">
+    </div>
+
+    <!-- Weight Converter -->
+    <div id="weight-converter" class="converter-box" style="display:none;">
+      <input type="number" id="kg" placeholder="Kilograms" oninput="kgToGram()">
+      <input type="number" id="grams" placeholder="Grams" oninput="gramToKg()">
+    </div>
+
+    <!-- Temperature Converter -->
+    <div id="temp-converter" class="converter-box" style="display:none;">
+      <input type="number" id="celsius" placeholder="Celsius" oninput="cToF()">
+      <input type="number" id="fahrenheit" placeholder="Fahrenheit" oninput="fToC()">
+    </div>
+  </section>
+
+  <!-- Ad slot bottom -->
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-xxxxxxxxxx"
+       data-ad-slot="0987654321"
+       data-ad-format="auto"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+  <footer>
+    <p>
+      <a href="about.html">About Us</a> | 
+      <a href="contact.html">Contact Us</a> | 
+      <a href="privacy.html">Privacy Policy</a>
+    </p>
+  </footer>
+
+<script>
+  // Age Calculator
+  function calculateAge() {
+    let dob = document.getElementById("dob").value;
+    if (!dob) { document.getElementById("age-result").innerText = "Please select your date of birth."; return; }
+    let birthDate = new Date(dob);
+    let today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    let m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) age--;
+    document.getElementById("age-result").innerText = "Your Age is: " + age + " years";
+  }
+
+  // BMI Calculator
+  function calculateBMI() {
+    let w = document.getElementById("weight").value;
+    let h = document.getElementById("height").value;
+    if (!w || !h) { document.getElementById("bmi-result").innerText = "Please enter weight and height."; return; }
+    let bmi = w / ((h/100) * (h/100));
+    let category = "";
+    if (bmi < 18.5) category = "Underweight";
+    else if (bmi < 24.9) category = "Normal weight";
+    else if (bmi < 29.9) category = "Overweight";
+    else category = "Obese";
+    document.getElementById("bmi-result").innerText = "Your BMI is " + bmi.toFixed(2) + " (" + category + ")";
+  }
+
+  // Unit Converter
+  function showConverter() {
+    document.getElementById("length-converter").style.display = "none";
+    document.getElementById("weight-converter").style.display = "none";
+    document.getElementById("temp-converter").style.display = "none";
+    let type = document.getElementById("converter-type").value;
+    document.getElementById(type + "-converter").style.display = "block";
+  }
+  function metersToKm() { let m = document.getElementById("meters").value; document.getElementById("kilometers").value = (m/1000).toFixed(3); }
+  function kmToMeters() { let km = document.getElementById("kilometers").value; document.getElementById("meters").value = (km*1000).toFixed(2); }
+  function kgToGram() { let kg = document.getElementById("kg").value; document.getElementById("grams").value = (kg*1000).toFixed(2); }
+  function gramToKg() { let g = document.getElementById("grams").value; document.getElementById("kg").value = (g/1000).toFixed(3); }
+  function cToF() { let c = document.getElementById("celsius").value; document.getElementById("fahrenheit").value = ((c*9/5)+32).toFixed(2); }
+  function fToC() { let f = document.getElementById("fahrenheit").value; document.getElementById("celsius").value = ((f-32)*5/9).toFixed(2); }
+</script>
+</body>
+    </html>
