@@ -1,243 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>PDF to Editable Text (OCR) – Daily Tools Hub</title>
-<meta name="description" content="Free online PDF to text converter with OCR. Extract editable text from scanned PDFs using your browser. No upload, privacy-friendly.">
-<style>
-  :root { --brand:#0078d7; --dark:#2c3e50; --light:#f5f7fa; }
-  *{box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
-  body{margin:0;background:#f5f7fa;color:#333}
-  header{background:var(--dark);color:#fff;padding:14px 22px;display:flex;justify-content:space-between;align-items:center}
-  header .logo{font-weight:bold}
-  header a{color:#fff;text-decoration:none;margin-left:16px}
-  header a:hover, header a.active{text-decoration:underline}
-  main{max-width:1100px;margin:22px auto;padding:0 16px}
-  h1{font-size:26px;margin-bottom:6px}
-  .sub{color:#555;margin-bottom:18px}
-  .card{background:#fff;border-radius:12px;padding:18px;box-shadow:0 6px 16px rgba(0,0,0,.08)}
-  .row{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
-  .ctrl{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:12px 0}
-  .btn{background:var(--brand);color:#fff;border:none;border-radius:8px;padding:10px 14px;cursor:pointer}
-  .btn[disabled]{opacity:.5;cursor:not-allowed}
-  .ghost{background:#e9eef6;color:#13406a}
-  input[type="file"]{display:none}
-  label.file{border:2px dashed #b8c3d1;border-radius:10px;padding:18px 16px;display:inline-flex;align-items:center;gap:10px;cursor:pointer}
-  .progress{height:10px;background:#e9eef6;border-radius:999px;overflow:hidden;margin:10px 0;display:none}
-  .bar{height:100%;width:0;background:var(--brand);transition:width .2s}
-  .log{background:#0b1220;color:#cfe8ff;font-family:ui-monospace,Consolas,monospace;border-radius:8px;padding:12px;height:140px;overflow:auto;font-size:12px}
-  .results{margin-top:16px}
-  textarea{width:100%;min-height:220px;padding:12px;border:1px solid #d6dce5;border-radius:8px;resize:vertical}
-  .hint{font-size:12px;color:#666}
-  .pill{padding:6px 10px;border-radius:999px;background:#eef5ff;border:1px solid #d6e8ff}
-  .lang{padding:8px;border:1px solid #ccd5e1;border-radius:8px;background:#fff}
-  .center{display:flex;gap:10px;align-items:center}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OCR PDF Converter - Daily Tools Hub</title>
+  <meta name="description" content="Convert scanned PDFs to editable text online for free using OCR.">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      color: #007bff;
+    }
+    .upload-box {
+      margin: 20px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+      max-width: 500px;
+    }
+    input[type="file"] {
+      margin: 15px 0;
+    }
+    #output {
+      margin-top: 20px;
+      text-align: left;
+      white-space: pre-wrap;
+      background: #f1f1f1;
+      padding: 15px;
+      border-radius: 5px;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+    .loader {
+      display: none;
+      margin-top: 15px;
+      color: #007bff;
+      font-weight: bold;
+    }
+    a {
+      display: inline-block;
+      margin-top: 20px;
+      text-decoration: none;
+      color: #007bff;
+    }
+  </style>
 </head>
 <body>
+  <h1>OCR PDF Converter</h1>
+  <p>Upload your PDF or image file to extract editable text instantly.</p>
 
-<header>
-  <div class="logo">Daily Tools Hub</div>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
-    <a href="privacy.html">Privacy</a>
-    <a href="ocr-pdf-converter.html" class="active">PDF OCR</a>
-  </nav>
-</header>
-
-<main>
-  <h1>PDF → Editable Text (OCR)</h1>
-  <p class="sub">Scanned PDFs ko editable text me convert karein. Sab kuch aapke browser me hota hai — data upload nahi hota ✅</p>
-
-  <div class="card">
-    <div class="ctrl row">
-      <label class="file">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="#0078d7"><path d="M19 15v4H5v-4H3v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4h-2zM11 16h2V8h3l-4-4-4 4h3z"/></svg>
-        <input id="fileInput" type="file" accept="application/pdf"/>
-        <span><b>Choose PDF</b> (scanned or normal)</span>
-      </label>
-
-      <div class="center">
-        <span class="pill">Pages scale:</span>
-        <input type="range" id="scale" min="1" max="2.5" step="0.1" value="1.6" />
-        <span id="scaleVal" class="pill">1.6x</span>
-      </div>
-
-      <div class="center">
-        <span class="pill">Language:</span>
-        <select id="lang" class="lang" title="OCR language">
-          <option value="eng" selected>English (eng)</option>
-          <option value="urd">Urdu (urd)</option>
-          <option value="ara">Arabic (ara)</option>
-          <option value="hin">Hindi (hin)</option>
-        </select>
-      </div>
-
-      <button id="startBtn" class="btn" disabled>Start OCR</button>
-      <button id="cancelBtn" class="btn ghost" disabled>Cancel</button>
-    </div>
-
-    <div class="progress" id="progress"><div class="bar" id="bar"></div></div>
-    <div class="log" id="log" aria-live="polite"></div>
-
-    <div class="results" id="results" style="display:none">
-      <h3>Extracted Text</h3>
-      <textarea id="output" placeholder="OCR result will appear here..."></textarea>
-      <div class="ctrl">
-        <button id="saveTxt" class="btn">Download .txt</button>
-        <button id="saveDocx" class="btn">Download .docx</button>
-        <span class="hint">Tip: Result ko edit karke phir download kar sakte hain.</span>
-      </div>
-    </div>
-
-    <p class="hint">Note: Best results ke liye clear scans use karein. Multi-language PDFs ke liye relevant language select karein.</p>
+  <div class="upload-box">
+    <input type="file" id="fileInput" accept="application/pdf,image/*">
+    <button onclick="startOCR()">Convert</button>
+    <div class="loader" id="loader">⏳ Processing... Please wait</div>
   </div>
-</main>
 
-<!-- Libraries (CDN) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js" integrity="sha512-0tT0bTjur1vJQhHYrFYm1kN0C0q7D1S1pLatlqg7F90P9x8S+qGk7m0Y6oAJ+JxR2o4q0v5NC0tF4fC+GOr8NQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script>
-  // pdfjs worker (required)
-  if (window['pdfjsLib']) {
-    pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js";
-  }
-</script>
-<script src="https://cdn.jsdelivr.net/npm/tesseract.js@4.0.2/dist/tesseract.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js" integrity="sha512-5x3bqT9A0VhQbS4cJ+VYo1G5uC0pGzJrQDiW9B8iV5Q6wWcLw8Zp6WQ1a8tO0Lw6kF2p7HblQG8C+3GzD0h4wQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.js"></script>
+  <div id="output"></div>
 
-<script>
-  const $ = (id)=>document.getElementById(id);
-  const fileInput = $("fileInput");
-  const startBtn = $("startBtn");
-  const cancelBtn = $("cancelBtn");
-  const progress = $("progress");
-  const bar = $("bar");
-  const log = $("log");
-  const output = $("output");
-  const results = $("results");
-  const saveTxt = $("saveTxt");
-  const saveDocx = $("saveDocx");
-  const scaleInput = $("scale");
-  const scaleVal = $("scaleVal");
-  const langSel = $("lang");
+  <a href="index.html">⬅ Back to Home</a>
 
-  let cancelRequested = false;
-  let currentFile = null;
+  <!-- Tesseract.js -->
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
 
-  scaleInput.addEventListener('input', ()=> { scaleVal.textContent = scaleInput.value + 'x'; });
-
-  fileInput.addEventListener("change", () => {
-    currentFile = fileInput.files[0] || null;
-    startBtn.disabled = !currentFile;
-    log.textContent = currentFile ? `Selected: ${currentFile.name} (${(currentFile.size/1024/1024).toFixed(2)} MB)` : "No file";
-  });
-
-  cancelBtn.addEventListener("click", () => {
-    cancelRequested = true;
-    cancelBtn.disabled = true;
-    logMessage("Cancelling…");
-  });
-
-  startBtn.addEventListener("click", async () => {
-    if (!currentFile) return;
-    cancelRequested = false;
-    results.style.display = "none";
-    output.value = "";
-    startBtn.disabled = true;
-    cancelBtn.disabled = false;
-    progress.style.display = "block";
-    bar.style.width = "0%";
-    log.textContent = "";
-
-    try {
-      const arrayBuffer = await currentFile.arrayBuffer();
-      const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
-      logMessage(`PDF loaded: ${pdf.numPages} page(s)`);
-      const scl = Number(scaleInput.value);
-
-      let fullText = "";
-      for (let p = 1; p <= pdf.numPages; p++) {
-        if (cancelRequested) break;
-        const page = await pdf.getPage(p);
-        const viewport = page.getViewport({ scale: scl });
-        const canvas = document.createElement("canvas");
-        const ctx = canvas.getContext("2d", { willReadFrequently: true });
-        canvas.width = viewport.width;
-        canvas.height = viewport.height;
-
-        await page.render({ canvasContext: ctx, viewport }).promise;
-        logMessage(`Page ${p}/${pdf.numPages} rendered (${Math.round(viewport.width)}x${Math.round(viewport.height)})`);
-
-        const dataUrl = canvas.toDataURL("image/png");
-
-        const worker = Tesseract.createWorker({
-          logger: m => {
-            if (m.status === 'recognizing text' && m.progress != null) {
-              const pct = Math.min(100, Math.round(((p-1)+m.progress) / pdf.numPages * 100));
-              bar.style.width = pct + "%";
-            }
-          }
-        });
-
-        const lang = langSel.value || 'eng';
-        await worker.load();
-        await worker.loadLanguage(lang);
-        await worker.initialize(lang);
-
-        const { data: { text } } = await worker.recognize(dataUrl);
-        await worker.terminate();
-
-        logMessage(`Page ${p} OCR done, ${text.trim().split(/\s+/).length} words`);
-        fullText += `\n\n---- Page ${p} ----\n` + text.trim();
+  <script>
+    async function startOCR() {
+      const file = document.getElementById("fileInput").files[0];
+      if (!file) {
+        alert("Please upload a PDF or image file.");
+        return;
       }
 
-      if (cancelRequested) {
-        logMessage("Cancelled by user.");
+      document.getElementById("loader").style.display = "block";
+      document.getElementById("output").innerText = "";
+
+      if (file.type === "application/pdf") {
+        // Convert PDF pages to images using PDF.js
+        const pdf = await pdfjsLib.getDocument(URL.createObjectURL(file)).promise;
+        for (let i = 1; i <= pdf.numPages; i++) {
+          const page = await pdf.getPage(i);
+          const viewport = page.getViewport({ scale: 2 });
+          const canvas = document.createElement("canvas");
+          const context = canvas.getContext("2d");
+          canvas.width = viewport.width;
+          canvas.height = viewport.height;
+          await page.render({ canvasContext: context, viewport: viewport }).promise;
+
+          const result = await Tesseract.recognize(canvas, "eng");
+          document.getElementById("output").innerText += `--- Page ${i} ---\n` + result.data.text + "\n\n";
+        }
       } else {
-        output.value = fullText.trim();
-        results.style.display = "block";
-        logMessage("✅ OCR complete.");
-        bar.style.width = "100%";
+        // Handle Images directly
+        const result = await Tesseract.recognize(file, "eng");
+        document.getElementById("output").innerText = result.data.text;
       }
-    } catch (e) {
-      console.error(e);
-      logMessage("❌ Error: " + e.message);
-    } finally {
-      startBtn.disabled = false;
-      cancelBtn.disabled = true;
-      setTimeout(()=> progress.style.display = "none", 400);
+
+      document.getElementById("loader").style.display = "none";
     }
-  });
-
-  saveTxt.addEventListener("click", () => {
-    const blob = new Blob([output.value || ""], { type: "text/plain;charset=utf-8" });
-    saveAs(blob, (currentFile ? baseName(currentFile.name) : "ocr") + ".txt");
-  });
-
-  saveDocx.addEventListener("click", () => {
-    const { Document, Packer, Paragraph } = docx;
-    const lines = (output.value || "").split(/\r?\n/);
-    const doc = new Document({
-      sections: [{ properties: {}, children: lines.map(t => new Paragraph(t)) }]
-    });
-    Packer.toBlob(doc).then(blob => {
-      saveAs(blob, (currentFile ? baseName(currentFile.name) : "ocr") + ".docx");
-    });
-  });
-
-  function baseName(name){
-    const i = name.lastIndexOf(".");
-    return i > 0 ? name.slice(0,i) : name;
-  }
-  function logMessage(msg){
-    const time = new Date().toLocaleTimeString();
-    log.textContent += `[${time}] ${msg}\n`;
-    log.scrollTop = log.scrollHeight;
-  }
-</script>
+  </script>
 </body>
 </html>
